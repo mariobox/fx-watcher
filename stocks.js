@@ -21,7 +21,7 @@ const url2 =
 
 // Set up our global variables
 let countries = ["ARG", "BRA", "CHI", "COL", "MEX", "PER"];
-let flags =["../img/arg.png", "../img/bra.png", "../img/chi.png", "../img/col.png", "../img/mex.png", "../img/per.png"];
+let flags =["img/arg.png", "img/bra.png", "img/chi.png", "img/col.png", "img/mex.png", "img/per.png"];
 let exchanges = [];
 let exchangesly = [];
 
