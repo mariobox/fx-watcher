@@ -20,8 +20,8 @@ const url2 =
     `https://api.worldtradingdata.com/api/v1/forex_single_day?base=USD&date=${formattedLastYear}&api_token=onH6cZpUDVXChT9cbQ6jHuCkgoWPjCmBNRz0Sy5hs4icLbqds5ta1VF0pDpl`;
 
 // Set up our global variables
-let countries = ["ARG", "BRA", "CHI", "COL", "MEX", "PER"];
-let flags =["img/arg.png", "img/bra.png", "img/chi.png", "img/col.png", "img/mex.png", "img/per.png"];
+let countries = ["ARG", "AUS", "BRA", "CAN", "CHI", "CHN", "COL", "EUR", "GBR", "IND", "JAP", "MEX", "PER", "RUS"];
+let flags =["img/arg.png", "img/aus.png", "img/bra.png", "img/can.png", "img/chi.png", "img/chn.png", "img/col.png", "img/eur.png", "img/gbr.png", "img/ind.png", "img/jap.png", "img/mex.png", "img/per.png", "img/rus.png"];
 let exchanges = [];
 let exchangesly = [];
 
@@ -37,20 +37,36 @@ const fetchExchange = async () => {
 // Update our arrays with exchange rate data return from fetch calls
     exchanges = [
     parseFloat(rates.data["ARS"]).toFixed(2),
+    parseFloat(rates.data["AUD"]).toFixed(2),
     parseFloat(rates.data["BRL"]).toFixed(2),
+    parseFloat(rates.data["CAD"]).toFixed(2),
     parseFloat(rates.data["CLP"]).toFixed(2),
+    parseFloat(rates.data["CNY"]).toFixed(2),
     parseFloat(rates.data["COP"]).toFixed(2),
+    parseFloat(rates.data["EUR"]).toFixed(2),
+    parseFloat(rates.data["GBP"]).toFixed(2),
+    parseFloat(rates.data["INR"]).toFixed(2),
+    parseFloat(rates.data["JPY"]).toFixed(2),
     parseFloat(rates.data["MXN"]).toFixed(2),
-    parseFloat(rates.data["PEN"]).toFixed(2)
+    parseFloat(rates.data["PEN"]).toFixed(2),
+    parseFloat(rates.data["RUB"]).toFixed(2)
     ];
 
     exchangesly = [
     parseFloat(ratesly.data["ARS"]),
+    parseFloat(ratesly.data["AUD"]),
     parseFloat(ratesly.data["BRL"]),
+    parseFloat(ratesly.data["CAD"]),
     parseFloat(ratesly.data["CLP"]),
+    parseFloat(ratesly.data["CNY"]),
     parseFloat(ratesly.data["COP"]),
+    parseFloat(ratesly.data["EUR"]),
+    parseFloat(ratesly.data["GBP"]),
+    parseFloat(ratesly.data["INR"]),
+    parseFloat(ratesly.data["JPY"]),
     parseFloat(ratesly.data["MXN"]),
-    parseFloat(ratesly.data["PEN"])
+    parseFloat(ratesly.data["PEN"]),
+    parseFloat(ratesly.data["RUB"])
     ];
 
 // Build the rows where each currency info will be displayed
