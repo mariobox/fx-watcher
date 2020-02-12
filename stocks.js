@@ -36,20 +36,20 @@ const fetchExchange = async () => {
 
 // Update our arrays with exchange rate data return from fetch calls
     exchanges = [
-    parseFloat(rates.data["ARS"]).toFixed(2),
-    parseFloat(rates.data["AUD"]).toFixed(2),
-    parseFloat(rates.data["BRL"]).toFixed(2),
-    parseFloat(rates.data["CAD"]).toFixed(2),
-    parseFloat(rates.data["CLP"]).toFixed(2),
-    parseFloat(rates.data["CNY"]).toFixed(2),
-    parseFloat(rates.data["COP"]).toFixed(2),
-    parseFloat(rates.data["EUR"]).toFixed(2),
-    parseFloat(rates.data["GBP"]).toFixed(2),
-    parseFloat(rates.data["INR"]).toFixed(2),
-    parseFloat(rates.data["JPY"]).toFixed(2),
-    parseFloat(rates.data["MXN"]).toFixed(2),
-    parseFloat(rates.data["PEN"]).toFixed(2),
-    parseFloat(rates.data["RUB"]).toFixed(2)
+    parseFloat(rates.data["ARS"]),
+    parseFloat(rates.data["AUD"]),
+    parseFloat(rates.data["BRL"]),
+    parseFloat(rates.data["CAD"]),
+    parseFloat(rates.data["CLP"]),
+    parseFloat(rates.data["CNY"]),
+    parseFloat(rates.data["COP"]),
+    parseFloat(rates.data["EUR"]),
+    parseFloat(rates.data["GBP"]),
+    parseFloat(rates.data["INR"]),
+    parseFloat(rates.data["JPY"]),
+    parseFloat(rates.data["MXN"]),
+    parseFloat(rates.data["PEN"]),
+    parseFloat(rates.data["RUB"])
     ];
 
     exchangesly = [
@@ -80,7 +80,7 @@ for (let i = 0; i < l; i++) {
     		<tr>
       		<th scope="row"><img src="${flags[i]}" width="25px"</th>
       		<td><strong>${countries[i]}</strong></td>
-      		<td><strong>${exchanges[i]}</strong></td>
+      		<td><strong>${exchanges[i].toFixed(2)}</strong></td>
       		<td><p class="change" style="background-color:${bkchangely}"><strong>${(((exchanges[i] - exchangesly[i])/exchanges[i])*100*(-1)).toFixed(2)}%</strong></p></td>
     		</tr>`
 } 
