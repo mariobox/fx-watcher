@@ -16,11 +16,11 @@ let formattedLastYear = `${ly.getFullYear()}-${ly.getMonth()+1}-${ly.getDate()}`
 const url1 = 
     `https://api.worldtradingdata.com/api/v1/forex?base=USD&api_token=onH6cZpUDVXChT9cbQ6jHuCkgoWPjCmBNRz0Sy5hs4icLbqds5ta1VF0pDpl`;
 
-const url2 = 
+const url2 =
     `https://api.worldtradingdata.com/api/v1/forex_single_day?base=USD&date=${formattedLastYear}&api_token=onH6cZpUDVXChT9cbQ6jHuCkgoWPjCmBNRz0Sy5hs4icLbqds5ta1VF0pDpl`;
 
 // Set up our global variables
-let countries = ["ARG", "AUS", "BRA", "CAN", "CHI", "CHN", "COL", "EUR", "GBR", "IND", "JAP", "MEX", "PER", "RUS"];
+let currencies = ["ARS", "AUD", "BRL", "CAD", "CLP", "CNY", "COP", "EUR", "GBP", "INR", "JPY", "MXN", "PEN", "RUB"];
 let flags =["img/arg.png", "img/aus.png", "img/bra.png", "img/can.png", "img/chi.png", "img/chn.png", "img/col.png", "img/eur.png", "img/gbr.png", "img/ind.png", "img/jap.png", "img/mex.png", "img/per.png", "img/rus.png"];
 let exchanges = [];
 let exchangesly = [];
@@ -30,74 +30,41 @@ let exchangesly = [];
 const fetchExchange = async () => {
     const res = await fetch(url1);
     const rates = await res.json();
-
+    
     const resly = await fetch(url2);
     const ratesly = await resly.json();
 
 // Update our arrays with exchange rate data return from fetch calls
-    exchanges = [
-    parseFloat(rates.data["ARS"]),
-    parseFloat(rates.data["AUD"]),
-    parseFloat(rates.data["BRL"]),
-    parseFloat(rates.data["CAD"]),
-    parseFloat(rates.data["CLP"]),
-    parseFloat(rates.data["CNY"]),
-    parseFloat(rates.data["COP"]),
-    parseFloat(rates.data["EUR"]),
-    parseFloat(rates.data["GBP"]),
-    parseFloat(rates.data["INR"]),
-    parseFloat(rates.data["JPY"]),
-    parseFloat(rates.data["MXN"]),
-    parseFloat(rates.data["PEN"]),
-    parseFloat(rates.data["RUB"])
-    ];
-
-    exchangesly = [
-    parseFloat(ratesly.data["ARS"]),
-    parseFloat(ratesly.data["AUD"]),
-    parseFloat(ratesly.data["BRL"]),
-    parseFloat(ratesly.data["CAD"]),
-    parseFloat(ratesly.data["CLP"]),
-    parseFloat(ratesly.data["CNY"]),
-    parseFloat(ratesly.data["COP"]),
-    parseFloat(ratesly.data["EUR"]),
-    parseFloat(ratesly.data["GBP"]),
-    parseFloat(ratesly.data["INR"]),
-    parseFloat(ratesly.data["JPY"]),
-    parseFloat(ratesly.data["MXN"]),
-    parseFloat(ratesly.data["PEN"]),
-    parseFloat(ratesly.data["RUB"])
-    ];
-
+    for(let i = 0; i < currencies.length; i++) {
+        exchanges.push(parseFloat(rates.data[currencies[i]]))
+    }
+   
+    for(let i = 0; i < currencies.length; i++) {
+        exchangesly.push(parseFloat(ratesly.data[currencies[i]]))
+     } 
+    
 // Build the rows where each currency info will be displayed
   // Automate color background of devaluation %VLY
-let bkchangely = '';
-let l = countries.length;
-for (let i = 0; i < l; i++) {
-      exchanges[i] - exchangesly[i] < 0 ? bkchangely = "#00CC00": bkchangely = "#FF0000";
-      
-      html += `
-    		<tr>
-      		<th scope="row"><img src="${flags[i]}" width="25px"</th>
-      		<td><strong>${countries[i]}</strong></td>
-      		<td><strong>${exchanges[i].toFixed(2)}</strong></td>
-      		<td><p class="change" style="background-color:${bkchangely}"><strong>${(((exchanges[i] - exchangesly[i])/exchanges[i])*100*(-1)).toFixed(2)}%</strong></p></td>
-    		</tr>`
-} 
+    let bkchangely = '';
+    let l = currencies.length;
+    for (let i = 0; i < l; i++) {
+        exchanges[i] - exchangesly[i] < 0 ? bkchangely = "#00CC00": bkchangely = "#FF0000";
+        
+        html += `
+                <tr>
+                <th scope="row"><img src="${flags[i]}" width="25px"</th>
+                <td><strong>${currencies[i]}</strong></td>
+                <td><strong>${exchanges[i].toFixed(2)}</strong></td>
+                <td><p class="change" style="background-color:${bkchangely}"><strong>${(((exchanges[i] - exchangesly[i])/exchanges[i])*100*(-1)).toFixed(2)}%</strong></p></td>
+                </tr>`
+    } 
 
-// Build our table
-html = `<table class="table table-dark"><tbody>${html}</tbody></table>`;
+    // Build our table
+    html = `<table class="table table-dark"><tbody>${html}</tbody></table>`;
 
-// Display our table
-document.getElementById("root").innerHTML = html;
+    // Display our table
+    document.getElementById("root").innerHTML = html;
 }
 
 // Make magic
 fetchExchange();
-
-
-
-
-
-
-
